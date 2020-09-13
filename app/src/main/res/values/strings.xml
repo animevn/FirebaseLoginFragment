@@ -5,4 +5,8 @@
     <string name="password_hint">Password</string>
     <string name="email_hint">Email</string>
     <string name="button_login">Login</string>
+    <string name="forgot_password"><u>Forgot Password?</u></string>
+    <string name="remember_me">Remember me</string>
+    <string name="login_google"><u>Login with Google</u></string>
+    <string name="register"><u>Register here</u></string>
 </resources>
