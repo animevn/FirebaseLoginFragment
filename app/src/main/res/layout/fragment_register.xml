@@ -86,7 +86,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/buttonLogin"
+                android:id="@+id/buttonRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -95,7 +95,7 @@
                 android:backgroundTint="@color/buttonColor"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
-                android:text="@string/button_login"
+                android:text="@string/button_register"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -135,7 +135,7 @@
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
+                app:layout_constraintTop_toBottomOf="@+id/buttonRegister" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
@@ -165,7 +165,7 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         app:cardElevation="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewRegister"
+        app:layout_constraintBottom_toTopOf="@+id/textViewLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintWidth_percent=".85">
@@ -187,12 +187,12 @@
         app:layout_constraintTop_toBottomOf="@+id/cardViewDivider" />
 
     <TextView
-        android:id="@+id/textViewRegister"
+        android:id="@+id/textViewLogin"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        android:text="@string/register"
+        android:text="@string/already_registered"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textColor="@color/buttonColor"
         android:textSize="14sp"
