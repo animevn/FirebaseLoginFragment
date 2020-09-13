@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">FirebaseLogin</string>
+    <string name="btn_click">Button Click</string>
+    <string name="login_logo">Login Logo</string>
+    <string name="password_hint">Password</string>
+    <string name="email_hint">Email</string>
+    <string name="button_login">Login</string>
 </resources>
