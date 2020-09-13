@@ -11,4 +11,8 @@
     <string name="register"><u>Register here</u></string>
     <string name="button_register">Register</string>
     <string name="already_registered"><u>Already Register?</u></string>
+    <string name="button_reset">Reset Password</string>
+    <string name="reset_instruction">Type your registered email, we will send you password reset instructions.</string>
+    <string name="reset_title">Forget your password?</string>
+    <string name="back_to_login">Back to Login</string>
 </resources>

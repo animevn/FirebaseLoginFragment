@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_fragmentLogin_to_fragmentRegister"
             app:destination="@id/fragmentRegister" />
+        <action
+            android:id="@+id/action_fragmentLogin_to_fragmentReset"
+            app:destination="@id/fragmentReset" />
     </fragment>
     <fragment
         android:id="@+id/fragmentRegister"
@@ -21,6 +24,15 @@
         tools:layout="@layout/fragment_register" >
         <action
             android:id="@+id/action_fragmentRegister_to_fragmentLogin"
+            app:destination="@id/fragmentLogin" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentReset"
+        android:name="com.animevn.firebaselogin.FragmentReset"
+        android:label="fragment_reset"
+        tools:layout="@layout/fragment_reset" >
+        <action
+            android:id="@+id/action_fragmentReset_to_fragmentLogin"
             app:destination="@id/fragmentLogin" />
     </fragment>
 </navigation>

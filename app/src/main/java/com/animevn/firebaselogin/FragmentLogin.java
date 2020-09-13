@@ -69,6 +69,8 @@ public class FragmentLogin extends Fragment {
             case R.id.buttonLogin:
                 break;
             case R.id.textViewForgotPassword:
+                Navigation.findNavController(view)
+                        .navigate(R.id.action_fragmentLogin_to_fragmentReset);
                 break;
             case R.id.textViewGoogleSignIn:
                 break;
