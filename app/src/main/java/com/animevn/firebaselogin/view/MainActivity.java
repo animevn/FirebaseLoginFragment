@@ -1,8 +1,10 @@
-package com.animevn.firebaselogin;
+package com.animevn.firebaselogin.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+
+import com.animevn.firebaselogin.R;
 
 public class MainActivity extends AppCompatActivity {
 

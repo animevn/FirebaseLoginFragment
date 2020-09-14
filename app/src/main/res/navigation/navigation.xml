@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragmentLogin"
-        android:name="com.animevn.firebaselogin.FragmentLogin"
+        android:name="com.animevn.firebaselogin.view.FragmentLogin"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/fragmentRegister"
-        android:name="com.animevn.firebaselogin.FragmentRegister"
+        android:name="com.animevn.firebaselogin.view.FragmentRegister"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -35,7 +35,7 @@
 
     <fragment
         android:id="@+id/fragmentReset"
-        android:name="com.animevn.firebaselogin.FragmentReset"
+        android:name="com.animevn.firebaselogin.view.FragmentReset"
         android:label="fragment_reset"
         tools:layout="@layout/fragment_reset" >
         <action
@@ -47,7 +47,13 @@
 
     <fragment
         android:id="@+id/fragmentMain"
-        android:name="com.animevn.firebaselogin.FragmentMain"
+        android:name="com.animevn.firebaselogin.view.FragmentMain"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_fragmentMain_to_fragmentLogin"
+            app:destination="@id/fragmentLogin"
+            app:popUpTo="@id/fragmentLogin"
+            app:popUpToInclusive="true"/>
+    </fragment>
 </navigation>
