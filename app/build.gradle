@@ -45,7 +45,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
 
     //google services
-    implementation 'com.google.firebase:firebase-auth:19.3.2'
+    implementation 'com.google.android.gms:play-services-auth:18.1.0'
 
     //firebase signin
     implementation 'com.google.firebase:firebase-auth:19.3.2'

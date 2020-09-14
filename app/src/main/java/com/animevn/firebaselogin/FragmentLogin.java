@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -32,6 +34,9 @@ public class FragmentLogin extends Fragment {
     TextView textViewGoogleSignIn;
     @BindView(R.id.textViewRegister)
     TextView textViewRegister;
+
+    private FirebaseAuth firebaseAuth;
+    private GoogleSignInClient client;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -67,6 +72,8 @@ public class FragmentLogin extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.buttonLogin:
+                Navigation.findNavController(view)
+                        .navigate(R.id.action_fragmentLogin_to_fragmentMain);
                 break;
             case R.id.textViewForgotPassword:
                 Navigation.findNavController(view)

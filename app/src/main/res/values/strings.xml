@@ -15,4 +15,10 @@
     <string name="reset_instruction">Type your registered email, we will send you password reset instructions.</string>
     <string name="reset_title">Forget your password?</string>
     <string name="back_to_login">Back to Login</string>
+    <string name="email">Email</string>
+    <string name="change_email">Change Email</string>
+    <string name="change_password">Change Password</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="remove_user">Remove User</string>
+    <string name="log_out">Log Out</string>
 </resources>

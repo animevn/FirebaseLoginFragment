@@ -16,7 +16,11 @@
         <action
             android:id="@+id/action_fragmentLogin_to_fragmentReset"
             app:destination="@id/fragmentReset" />
+        <action
+            android:id="@+id/action_fragmentLogin_to_fragmentMain"
+            app:destination="@id/fragmentMain" />
     </fragment>
+
     <fragment
         android:id="@+id/fragmentRegister"
         android:name="com.animevn.firebaselogin.FragmentRegister"
@@ -24,8 +28,11 @@
         tools:layout="@layout/fragment_register" >
         <action
             android:id="@+id/action_fragmentRegister_to_fragmentLogin"
-            app:destination="@id/fragmentLogin" />
+            app:destination="@id/fragmentLogin"
+            app:popUpTo="@id/fragmentLogin"
+            app:popUpToInclusive="true"/>
     </fragment>
+
     <fragment
         android:id="@+id/fragmentReset"
         android:name="com.animevn.firebaselogin.FragmentReset"
@@ -33,6 +40,14 @@
         tools:layout="@layout/fragment_reset" >
         <action
             android:id="@+id/action_fragmentReset_to_fragmentLogin"
-            app:destination="@id/fragmentLogin" />
+            app:destination="@id/fragmentLogin"
+            app:popUpTo="@id/fragmentLogin"
+            app:popUpToInclusive="true"/>
     </fragment>
+
+    <fragment
+        android:id="@+id/fragmentMain"
+        android:name="com.animevn.firebaselogin.FragmentMain"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" />
 </navigation>
