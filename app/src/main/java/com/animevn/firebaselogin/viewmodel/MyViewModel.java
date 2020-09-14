@@ -12,15 +12,6 @@ import androidx.lifecycle.AndroidViewModel;
 public class MyViewModel extends AndroidViewModel {
 
     private GoogleSignInClient googleClient;
-
-    public boolean isGoogleSignIn() {
-        return isGoogleSignIn;
-    }
-
-    public void setGoogleSignIn(boolean googleSignIn) {
-        isGoogleSignIn = googleSignIn;
-    }
-
     private boolean isGoogleSignIn = false;
 
     public MyViewModel(@NonNull Application application) {
@@ -37,6 +28,14 @@ public class MyViewModel extends AndroidViewModel {
         return GoogleSignIn.getClient(context, options);
     }
 
+    public boolean isGoogleSignIn() {
+        return isGoogleSignIn;
+    }
+
+    public void setGoogleSignIn(boolean googleSignIn) {
+        isGoogleSignIn = googleSignIn;
+    }
+
     public GoogleSignInClient getGoogleClient() {
         return googleClient;
     }
@@ -44,6 +43,5 @@ public class MyViewModel extends AndroidViewModel {
     public void signOutGoogleclient(){
         googleClient.signOut();
     }
-
 
 }

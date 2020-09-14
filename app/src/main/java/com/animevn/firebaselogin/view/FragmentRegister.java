@@ -1,15 +1,17 @@
 package com.animevn.firebaselogin.view;
 
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
-
 import com.animevn.firebaselogin.R;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -36,6 +38,8 @@ public class FragmentRegister extends Fragment {
     @BindView(R.id.textViewLogin)
     TextView textViewLogin;
 
+    private FirebaseAuth firebaseAuth;
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -55,14 +59,17 @@ public class FragmentRegister extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_register, container, false);
         ButterKnife.bind(this, view);
+        firebaseAuth = FirebaseAuth.getInstance();
         return view;
     }
 
 
-    @OnClick({R.id.buttonRegister, R.id.textViewForgotPassword, R.id.textViewGoogleSignIn, R.id.textViewLogin})
+    @OnClick({R.id.buttonRegister, R.id.textViewForgotPassword,
+            R.id.textViewGoogleSignIn, R.id.textViewLogin})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.buttonRegister:
+                signup();
                 break;
             case R.id.textViewForgotPassword:
                 break;
@@ -74,4 +81,52 @@ public class FragmentRegister extends Fragment {
                 break;
         }
     }
+
+    private void loginWithUserEmailAndPassword(String email, String password){
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (!task.isSuccessful()) {
+                Log.e("login error: ", "login failed");
+            } else {
+                if (getView() != null){
+                    Navigation.findNavController(getView())
+                            .navigate(R.id.action_fragmentRegister_to_fragmentMain);
+                }
+            }
+        });
+    }
+
+    private void registerWithFirebase(String email, String password){
+        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task->{
+            if (task.isSuccessful()){
+                loginWithUserEmailAndPassword(email, password);
+            } else {
+                Log.e("register: ", "signup failed");
+            }
+        });
+    }
+
+    private void signup(){
+        if (editTextPassword.getText() != null && editTextEmail.getText() != null){
+            String email = editTextEmail.getText().toString();
+            String password = editTextPassword.getText().toString();
+            if (TextUtils.isEmpty(email)){
+                editTextEmail.setError(getString(R.string.email_empty));
+                return;
+            }
+
+            if (TextUtils.isEmpty(password)){
+                editTextPassword.setError(getString(R.string.password_empty));
+                return;
+            }
+
+            if (password.length() < 6){
+                editTextPassword.setError(getString(R.string.minimum_password));
+                return;
+            }
+
+            registerWithFirebase(email, password);
+        }
+    }
+
+
 }

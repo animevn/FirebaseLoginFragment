@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.animevn.firebaselogin.R;
 import com.google.android.material.textfield.TextInputEditText;
 import androidx.annotation.NonNull;

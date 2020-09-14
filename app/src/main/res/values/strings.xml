@@ -21,4 +21,7 @@
     <string name="reset_password">Reset Password</string>
     <string name="remove_user">Remove User</string>
     <string name="log_out">Log Out</string>
+    <string name="email_empty">Email cannot be empty</string>
+    <string name="password_empty">Password cannot be empty</string>
+    <string name="minimum_password">Password cannot be less than 6 letters</string>
 </resources>
