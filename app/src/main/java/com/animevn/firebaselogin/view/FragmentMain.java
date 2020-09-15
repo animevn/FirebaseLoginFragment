@@ -143,6 +143,8 @@ public class FragmentMain extends Fragment {
                         .navigate(R.id.action_fragmentMain_to_fragmentMainReset);
                 break;
             case R.id.buttonRemoveUser:
+                Navigation.findNavController(view)
+                        .navigate(R.id.action_fragmentMain_to_fragmentMainRemove);
                 break;
             case R.id.buttonLogOut:
                 firebaseAuth.signOut();
