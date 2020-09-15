@@ -135,6 +135,8 @@ public class FragmentMain extends Fragment {
                         .navigate(R.id.action_fragmentMain_to_fragmentMainEmail);
                 break;
             case R.id.buttonChangePassword:
+                Navigation.findNavController(view)
+                        .navigate(R.id.action_fragmentMain_to_fragmentMainPassword);
                 break;
             case R.id.buttonResetPassowrd:
                 Navigation.findNavController(view)

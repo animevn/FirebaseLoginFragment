@@ -77,6 +77,9 @@
         <action
             android:id="@+id/action_fragmentMain_to_fragmentMainEmail"
             app:destination="@id/fragmentMainEmail" />
+        <action
+            android:id="@+id/action_fragmentMain_to_fragmentMainPassword"
+            app:destination="@id/fragmentMainPassword" />
     </fragment>
     <fragment
         android:id="@+id/fragmentMainReset"
@@ -106,6 +109,22 @@
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_fragmentMainEmail_to_fragmentLogin"
+            app:destination="@id/fragmentLogin"
+            app:popUpTo="@+id/fragmentLogin"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentMainPassword"
+        android:name="com.animevn.firebaselogin.view.FragmentMainPassword"
+        android:label="fragment_main_change_password"
+        tools:layout="@layout/fragment_main_change_password" >
+        <action
+            android:id="@+id/action_fragmentMainPassword_to_fragmentMain"
+            app:destination="@id/fragmentMain"
+            app:popUpTo="@+id/fragmentMain"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_fragmentMainPassword_to_fragmentLogin"
             app:destination="@id/fragmentLogin"
             app:popUpTo="@+id/fragmentLogin"
             app:popUpToInclusive="true" />

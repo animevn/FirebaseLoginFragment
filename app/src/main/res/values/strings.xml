@@ -25,4 +25,5 @@
     <string name="password_empty">Password cannot be empty</string>
     <string name="minimum_password">Password cannot be less than 6 letters</string>
     <string name="back_to_main">Back to Main</string>
+    <string name="new_password_hint">New Password</string>
 </resources>

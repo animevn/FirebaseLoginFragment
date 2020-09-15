@@ -26,22 +26,23 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class FragmentMainEmail extends Fragment {
+public class FragmentMainPassword extends Fragment {
 
-    @BindView(R.id.editTextEmail)
-    TextInputEditText editTextEmail;
+
     @BindView(R.id.editTextPassword)
     TextInputEditText editTextPassword;
-    @BindView(R.id.editTextNewEmail)
-    TextInputEditText editTextNewEmail;
-    @BindView(R.id.buttonChangeEmailFragment)
-    Button buttonChangeEmailFragment;
+    @BindView(R.id.editTextNewPassword)
+    TextInputEditText editTextNewPassword;
+    @BindView(R.id.buttonChangePasswordFragment)
+    Button buttonChangePasswordFragment;
     @BindView(R.id.textViewReturn)
     TextView textViewReturn;
+    @BindView(R.id.editTextEmail)
+    TextInputEditText editTextEmail;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
-    private String oldEmail;
+    private String currentEmail;
     private FragmentActivity activity;
 
     @Override
@@ -64,58 +65,57 @@ public class FragmentMainEmail extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main_change_email, container, false);
+        View view = inflater.inflate(R.layout.fragment_main_change_password, container, false);
         ButterKnife.bind(this, view);
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
         ShareModel viewModel = new ViewModelProvider(activity).get(ShareModel.class);
         if (viewModel.getEmail() != null) {
-            oldEmail = viewModel.getEmail();
-            editTextEmail.setText(oldEmail);
+            currentEmail = viewModel.getEmail();
+            editTextEmail.setText(currentEmail);
         }
         return view;
     }
 
-
-    @OnClick({R.id.buttonChangeEmailFragment, R.id.textViewReturn})
+    @OnClick({R.id.buttonChangePasswordFragment, R.id.textViewReturn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.buttonChangeEmailFragment:
-                reAuthenticateUserAndChangeEmail();
+            case R.id.buttonChangePasswordFragment:
+                reAuthenticateUserAndChangePassword();
                 break;
             case R.id.textViewReturn:
                 Navigation.findNavController(view)
-                        .navigate(R.id.action_fragmentMainEmail_to_fragmentMain);
+                        .navigate(R.id.action_fragmentMainPassword_to_fragmentMain);
                 break;
         }
     }
 
-    private void reAuthenticateUserAndChangeEmail(){
-        if (editTextNewEmail.getText() != null && user != null
-                && editTextPassword.getText() != null && oldEmail != null){
+    private void reAuthenticateUserAndChangePassword() {
+        if (editTextNewPassword.getText() != null && user != null
+                && editTextPassword.getText() != null && currentEmail != null) {
 
-            String newEmail = editTextNewEmail.getText().toString().trim();
-            String email = oldEmail.trim();
+            String newPassword = editTextNewPassword.getText().toString().trim();
+            String email = currentEmail.trim();
             String password = editTextPassword.getText().toString().trim();
 
             AuthCredential credential = EmailAuthProvider.getCredential(email, password);
             user.reauthenticate(credential).addOnCompleteListener(task -> {
-                if (task.isSuccessful()){
-                    user.updateEmail(newEmail).addOnCompleteListener(updateTask -> {
-                        if (updateTask.isSuccessful() && getView() != null){
+                if (task.isSuccessful()) {
+                    user.updatePassword(newPassword).addOnCompleteListener(updateTask -> {
+                        if (updateTask.isSuccessful() && getView() != null) {
                             firebaseAuth.signOut();
                             Navigation.findNavController(getView())
-                                    .navigate(R.id.action_fragmentMainEmail_to_fragmentLogin);
+                                    .navigate(R.id.action_fragmentMainPassword_to_fragmentLogin);
                         }
                     });
-                }else {
-                    Toast.makeText(activity, "Error changing email", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(activity, "Error changing password", Toast.LENGTH_SHORT).show();
                 }
             });
-        }else if (TextUtils.isEmpty(editTextNewEmail.getText())){
-            editTextNewEmail.setError(getString(R.string.email_empty));
-        } else if (TextUtils.isEmpty(editTextPassword.getText())){
-            editTextNewEmail.setError(getString(R.string.password_empty));
+        } else if (TextUtils.isEmpty(editTextNewPassword.getText())) {
+            editTextNewPassword.setError(getString(R.string.password_empty));
+        } else if (TextUtils.isEmpty(editTextPassword.getText())) {
+            editTextPassword.setError(getString(R.string.password_empty));
         }
     }
 
