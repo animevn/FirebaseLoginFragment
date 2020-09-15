@@ -36,6 +36,11 @@
             app:destination="@id/fragmentMain"
             app:popUpTo="@+id/fragmentMain"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_fragmentRegister_to_fragmentReset"
+            app:destination="@id/fragmentReset"
+            app:popUpTo="@+id/fragmentReset"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -48,6 +53,11 @@
             app:destination="@id/fragmentLogin"
             app:popUpTo="@id/fragmentLogin"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_fragmentReset_to_fragmentMain"
+            app:destination="@id/fragmentMain"
+            app:popUpTo="@+id/fragmentMain"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -60,5 +70,10 @@
             app:destination="@id/fragmentLogin"
             app:popUpTo="@id/fragmentLogin"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_fragmentMain_to_fragmentReset"
+            app:destination="@id/fragmentReset"
+            app:popUpTo="@+id/fragmentReset"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

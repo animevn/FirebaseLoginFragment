@@ -1,10 +1,8 @@
 package com.animevn.firebaselogin.view;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import com.animevn.firebaselogin.Model.Repo;
 import com.animevn.firebaselogin.R;
 import com.animevn.firebaselogin.viewmodel.ShareModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -19,9 +18,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.GoogleAuthProvider;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -31,6 +28,8 @@ import androidx.navigation.Navigation;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import static android.app.Activity.RESULT_OK;
+import static com.animevn.firebaselogin.Model.Constants.RC_SIGN_IN;
 
 public class FragmentLogin extends Fragment {
 
@@ -49,7 +48,6 @@ public class FragmentLogin extends Fragment {
     @BindView(R.id.textViewRegister)
     TextView textViewRegister;
 
-    public static final int RC_SIGN_IN = 2204;
     private FirebaseAuth firebaseAuth;
     private ShareModel viewModel;
     private FragmentActivity activity;
@@ -108,7 +106,8 @@ public class FragmentLogin extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.buttonLogin:
-                signIn();
+                Repo.signIn(editTextPassword, editTextEmail, activity,
+                        this::loginWithUserEmailAndPassword);
                 break;
             case R.id.textViewForgotPassword:
                 Navigation.findNavController(view)
@@ -121,29 +120,6 @@ public class FragmentLogin extends Fragment {
                 Navigation.findNavController(view)
                         .navigate(R.id.action_fragmentLogin_to_fragmentRegister);
                 break;
-        }
-    }
-
-    private void signIn(){
-        if (editTextPassword.getText() != null && editTextEmail.getText() != null){
-            String email = editTextEmail.getText().toString();
-            String password = editTextPassword.getText().toString();
-            if (TextUtils.isEmpty(email)){
-                editTextEmail.setError(getString(R.string.email_empty));
-                return;
-            }
-
-            if (TextUtils.isEmpty(password)){
-                editTextPassword.setError(getString(R.string.password_empty));
-                return;
-            }
-
-            if (password.length() < 6){
-                editTextPassword.setError(getString(R.string.minimum_password));
-                return;
-            }
-
-            loginWithUserEmailAndPassword(email, password);
         }
     }
 
@@ -163,12 +139,14 @@ public class FragmentLogin extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RC_SIGN_IN && resultCode == Activity.RESULT_OK && data != null){
+        if (requestCode == RC_SIGN_IN && resultCode == RESULT_OK && data != null){
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try{
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 if (account != null){
-                    getFirebaseAuthFromGoogleSignIn(account);
+                    Repo.getFirebaseAuthFromGoogleSignIn(account, firebaseAuth, getView(), view ->
+                            Navigation.findNavController(view)
+                            .navigate(R.id.action_fragmentLogin_to_fragmentMain));
                 }
             }catch (ApiException e){
                 Log.e("error1", "error");
@@ -176,15 +154,4 @@ public class FragmentLogin extends Fragment {
         }
     }
 
-    private void getFirebaseAuthFromGoogleSignIn(GoogleSignInAccount account){
-        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(task -> {
-            if (task.isSuccessful() && getView() != null){
-                Navigation.findNavController(getView())
-                        .navigate(R.id.action_fragmentLogin_to_fragmentMain);
-            }else {
-                Log.e("error2", "error");
-            }
-        });
-    }
 }

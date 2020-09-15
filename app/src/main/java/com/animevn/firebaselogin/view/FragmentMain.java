@@ -134,6 +134,8 @@ public class FragmentMain extends Fragment {
             case R.id.buttonChangePassword:
                 break;
             case R.id.buttonResetPassowrd:
+                Navigation.findNavController(view)
+                        .navigate(R.id.action_fragmentMain_to_fragmentReset);
                 break;
             case R.id.buttonRemoveUser:
                 break;
