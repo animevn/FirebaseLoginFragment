@@ -131,6 +131,8 @@ public class FragmentMain extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.buttonChangeEmail:
+                Navigation.findNavController(view)
+                        .navigate(R.id.action_fragmentMain_to_fragmentMainEmail);
                 break;
             case R.id.buttonChangePassword:
                 break;
