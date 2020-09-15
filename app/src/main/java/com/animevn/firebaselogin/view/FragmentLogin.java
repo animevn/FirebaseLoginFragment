@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import com.animevn.firebaselogin.R;
-import com.animevn.firebaselogin.viewmodel.MyViewModel;
+import com.animevn.firebaselogin.viewmodel.ShareModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.api.ApiException;
@@ -51,7 +51,7 @@ public class FragmentLogin extends Fragment {
 
     public static final int RC_SIGN_IN = 2204;
     private FirebaseAuth firebaseAuth;
-    private MyViewModel viewModel;
+    private ShareModel viewModel;
     private FragmentActivity activity;
 
     @Override
@@ -86,7 +86,7 @@ public class FragmentLogin extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         checkUserSignIn(view);
-        viewModel = new ViewModelProvider(activity).get(MyViewModel.class);
+        viewModel = new ViewModelProvider(activity).get(ShareModel.class);
     }
 
     private void checkUserSignIn(View view){
@@ -180,7 +180,6 @@ public class FragmentLogin extends Fragment {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(task -> {
             if (task.isSuccessful() && getView() != null){
-                viewModel.setGoogleSignIn(true);
                 Navigation.findNavController(getView())
                         .navigate(R.id.action_fragmentLogin_to_fragmentMain);
             }else {

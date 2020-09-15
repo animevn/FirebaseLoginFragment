@@ -9,12 +9,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
-public class MyViewModel extends AndroidViewModel {
+public class ShareModel extends AndroidViewModel {
 
     private GoogleSignInClient googleClient;
-    private boolean isGoogleSignIn = false;
 
-    public MyViewModel(@NonNull Application application) {
+    public ShareModel(@NonNull Application application) {
         super(application);
         googleClient = (initGoogleSignIn(application.getApplicationContext()));
     }
@@ -26,14 +25,6 @@ public class MyViewModel extends AndroidViewModel {
                 .requestEmail()
                 .build();
         return GoogleSignIn.getClient(context, options);
-    }
-
-    public boolean isGoogleSignIn() {
-        return isGoogleSignIn;
-    }
-
-    public void setGoogleSignIn(boolean googleSignIn) {
-        isGoogleSignIn = googleSignIn;
     }
 
     public GoogleSignInClient getGoogleClient() {

@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import com.animevn.firebaselogin.R;
-import com.animevn.firebaselogin.viewmodel.MyViewModel;
+import com.animevn.firebaselogin.viewmodel.ShareModel;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import androidx.activity.OnBackPressedCallback;
@@ -37,7 +39,7 @@ public class FragmentMain extends Fragment {
     @BindView(R.id.buttonLogOut)
     Button buttonLogOut;
 
-    private MyViewModel viewModel;
+    private ShareModel viewModel;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseUser user;
@@ -78,7 +80,7 @@ public class FragmentMain extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initFirebase(view);
-        viewModel = new ViewModelProvider(activity).get(MyViewModel.class);
+        viewModel = new ViewModelProvider(activity).get(ShareModel.class);
         initView();
     }
 
@@ -99,7 +101,8 @@ public class FragmentMain extends Fragment {
             textViewEmail.setText(user.getEmail());
         }
 
-        if (viewModel.isGoogleSignIn()){
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(activity);
+        if (account != null){
             buttonChangeEmail.setEnabled(false);
             buttonChangePassword.setEnabled(false);
             buttonResetPassowrd.setEnabled(false);
@@ -136,10 +139,7 @@ public class FragmentMain extends Fragment {
                 break;
             case R.id.buttonLogOut:
                 firebaseAuth.signOut();
-                if (viewModel.isGoogleSignIn()){
-                    viewModel.signOutGoogleclient();
-                    viewModel.setGoogleSignIn(false);
-                }
+                viewModel.signOutGoogleclient();
                 break;
         }
     }
