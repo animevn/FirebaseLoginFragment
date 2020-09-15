@@ -99,6 +99,7 @@ public class FragmentMain extends Fragment {
     private void initView(){
         if (user != null){
             textViewEmail.setText(user.getEmail());
+            viewModel.setEmail(user.getEmail());
         }
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(activity);
@@ -135,7 +136,7 @@ public class FragmentMain extends Fragment {
                 break;
             case R.id.buttonResetPassowrd:
                 Navigation.findNavController(view)
-                        .navigate(R.id.action_fragmentMain_to_fragmentReset);
+                        .navigate(R.id.action_fragmentMain_to_fragmentMainReset);
                 break;
             case R.id.buttonRemoveUser:
                 break;

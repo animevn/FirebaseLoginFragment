@@ -12,6 +12,7 @@ import androidx.lifecycle.AndroidViewModel;
 public class ShareModel extends AndroidViewModel {
 
     private GoogleSignInClient googleClient;
+    private String email;
 
     public ShareModel(@NonNull Application application) {
         super(application);
@@ -33,6 +34,14 @@ public class ShareModel extends AndroidViewModel {
 
     public void signOutGoogleclient(){
         googleClient.signOut();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }
